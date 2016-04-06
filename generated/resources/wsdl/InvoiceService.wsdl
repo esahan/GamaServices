@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="InvoiceService" targetNamespace="http://service.ap.ge.natica.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.ap.ge.natica.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://service.ap.ge.natica.com/" schemaLocation="InvoiceService_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="sendInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:sendInvoiceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendInvoice">
+    <wsdl:part name="parameters" element="tns:sendInvoice">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="BusinessException">
+    <wsdl:part name="BusinessException" element="tns:BusinessException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="invoice">
+    <wsdl:operation name="sendInvoice">
+      <wsdl:input name="sendInvoice" message="tns:sendInvoice">
+    </wsdl:input>
+      <wsdl:output name="sendInvoiceResponse" message="tns:sendInvoiceResponse">
+    </wsdl:output>
+      <wsdl:fault name="BusinessException" message="tns:BusinessException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="invoiceSoapBinding" type="tns:invoice">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sendInvoice">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sendInvoice">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendInvoiceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BusinessException">
+        <soap:fault name="BusinessException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InvoiceService">
+    <wsdl:port name="InvoiceServiceImplPort" binding="tns:invoiceSoapBinding">
+      <soap:address location="http://localhost:9090/InvoiceServiceImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

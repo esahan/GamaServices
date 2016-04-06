@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="JournalService" targetNamespace="http://service.gl.ge.natica.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.gl.ge.natica.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://service.gl.ge.natica.com/" schemaLocation="JournalService_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="SendJournal">
+    <wsdl:part name="parameters" element="tns:SendJournal">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="BusinessException">
+    <wsdl:part name="BusinessException" element="tns:BusinessException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SendJournalResponse">
+    <wsdl:part name="parameters" element="tns:SendJournalResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Journal">
+    <wsdl:operation name="SendJournal">
+      <wsdl:input name="SendJournal" message="tns:SendJournal">
+    </wsdl:input>
+      <wsdl:output name="SendJournalResponse" message="tns:SendJournalResponse">
+    </wsdl:output>
+      <wsdl:fault name="BusinessException" message="tns:BusinessException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="JournalSoapBinding" type="tns:Journal">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="SendJournal">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SendJournal">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SendJournalResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BusinessException">
+        <soap:fault name="BusinessException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="JournalService">
+    <wsdl:port name="JournalServiceImplPort" binding="tns:JournalSoapBinding">
+      <soap:address location="http://localhost:9090/JournalServiceImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

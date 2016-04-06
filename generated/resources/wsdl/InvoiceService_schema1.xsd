@@ -1,0 +1,71 @@
+<xs:schema xmlns:tns="http://service.ap.ge.natica.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.ap.ge.natica.com/">
+  <xs:element name="sendInvoice" type="tns:sendInvoice"/>
+  <xs:element name="sendInvoiceResponse" type="tns:sendInvoiceResponse"/>
+  <xs:complexType name="sendInvoice">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="invoiceHeader" type="tns:InvoiceHeader"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InvoiceHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="currencyCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="invoiceAmount" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="invoiceDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="invoiceNum" type="xs:string"/>
+      <xs:element minOccurs="0" name="invoiceType" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="invoiceLine" type="tns:invoiceLine"/>
+      <xs:element minOccurs="0" name="maximoInvoiceNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="termsId" type="xs:int"/>
+      <xs:element minOccurs="0" name="vendorSiteId" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="invoiceLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="assetCategory" type="xs:string"/>
+      <xs:element minOccurs="0" name="defaultDistCcid" type="xs:int"/>
+      <xs:element minOccurs="0" name="itemCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="lineDescription" type="xs:string"/>
+      <xs:element minOccurs="0" name="lineType" type="xs:string"/>
+      <xs:element minOccurs="0" name="poNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="quantityInvoiced" type="xs:int"/>
+      <xs:element minOccurs="0" name="serialNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="vatTaxAmount" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="vatTaxCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="withholdingTaxCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendInvoiceResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:invoiceResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="invoiceResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="errors" nillable="true" type="tns:invoiceError"/>
+      <xs:element minOccurs="0" name="invoiceNum" type="xs:string"/>
+      <xs:element minOccurs="0" name="maximoInvoiceNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="oracleHeaderId" type="xs:int"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="invoiceError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="businessExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="faultCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="faultMessage" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BusinessException" type="tns:BusinessException"/>
+  <xs:complexType name="BusinessException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="faultDetail" type="tns:businessExceptionDetail"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

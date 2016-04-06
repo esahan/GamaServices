@@ -1,0 +1,59 @@
+<xs:schema xmlns:tns="http://service.gl.ge.natica.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.gl.ge.natica.com/">
+  <xs:element name="SendJournal" type="tns:SendJournal"/>
+  <xs:element name="SendJournalResponse" type="tns:SendJournalResponse"/>
+  <xs:complexType name="SendJournal">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="JournalHeaders" type="tns:journalHeader"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="journalHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="journalCategory" type="xs:string"/>
+      <xs:element minOccurs="0" name="journalDate" type="xs:dateTime"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="journalLines" nillable="true" type="tns:journalLine"/>
+      <xs:element minOccurs="0" name="journalNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="maximoTrxId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="journalLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codeCombinationId" type="xs:int"/>
+      <xs:element minOccurs="0" name="creditAmount" type="xs:double"/>
+      <xs:element minOccurs="0" name="debitAmount" type="xs:double"/>
+      <xs:element minOccurs="0" name="lineDescription" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SendJournalResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:journalResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="journalResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="errors" nillable="true" type="tns:journalError"/>
+      <xs:element minOccurs="0" name="journalNum" type="xs:string"/>
+      <xs:element minOccurs="0" name="maximoTrxId" type="xs:string"/>
+      <xs:element minOccurs="0" name="oracleHeaderId" type="xs:int"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="journalError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="businessExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="faultCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="faultMessage" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BusinessException" type="tns:BusinessException"/>
+  <xs:complexType name="BusinessException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="faultDetail" type="tns:businessExceptionDetail"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+	<handler-chain>
+		<handler>
+			<handler-class>com.natica.ge.handler.LoggingHandler</handler-class>
+		</handler>
+	</handler-chain>
+</handler-chains>
